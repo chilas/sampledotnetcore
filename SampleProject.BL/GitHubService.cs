@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SampleProject.Contracts.Services;
 using SampleProject.Models;
 using System;
 using System.Collections.Generic;
@@ -7,23 +8,23 @@ using System.Threading.Tasks;
 
 namespace SampleProject.Services
 {
-    public class GitHubService
+    public class GitHubService<T> : IGitHubService<T> where T : class
     {
-        public GitHubService()
-        {
 
-        }
 
-        public async Task<GitHubModel> GetUser(string username)
+        public async Task<T> GetUser(string username)
         {
             username = username ?? "chilas";
 
             HttpClient client = new HttpClient()
             {
-                BaseAddress = new Uri("https://api.github.com/")
+                BaseAddress = new Uri("http://api.github.com/")
             };
-            var response = await client.GetStringAsync($"users/${username}");
-            var user = JsonConvert.DeserializeObject<GitHubModel>(response);
+            client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "http://developer.github.com/v3/#user-agent-required");
+            T user = null;
+            var response = await client.GetAsync($"users/{username}");
+            user = JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
+
             return user;
         }
     }

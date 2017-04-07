@@ -17,6 +17,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SampleProject.BL\SampleProject.Services.csproj" />
+    <ProjectReference Include="..\SampleProject.Contracts\SampleProject.Contracts.csproj" />
+    <ProjectReference Include="..\SampleProject.Models\SampleProject.Models.csproj" />
   </ItemGroup>
 
 </Project>

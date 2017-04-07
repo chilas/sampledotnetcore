@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using SampleProject.Contracts.Services;
+using SampleProject.Services;
+using SampleProject.Models;
 
 namespace API
 {
@@ -29,6 +32,7 @@ namespace API
         {
             // Add framework services.
             services.AddMvc();
+            services.AddTransient<IGitHubService<GitHubModel>, GitHubService<GitHubModel>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
