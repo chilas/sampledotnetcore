@@ -22,4 +22,4 @@ Consumes the services/repositories to provide data to the consumer/client in jso
 `GitHubController` uses *DI* to resolve the Service and uses it's own View model to display the information.
 
 ## Web
-_Not Implemented__
+_Not Implemented_
